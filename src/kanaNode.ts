@@ -8,6 +8,14 @@ class KanaNode {
         this.children = [];
         this.isTerminal = false;
     }
+
+    getChildOrNullByValue(value: string) {
+        return this.children.find(child => child.value === value) ?? null;
+    }
+
+    addChild(newChild: KanaNode) {
+        this.children.push(newChild);
+    }
 }
 
 export default KanaNode;
