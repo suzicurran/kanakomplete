@@ -57,7 +57,7 @@ describe("KanaNode", () => {
             expect(parentNode.children.length).toBe(1);
             const haChild = parentNode.children[0];
             expect(haChild).not.toBeNull;
-            expect(haChild!.children.length).toBe(1);
+            expect(haChild.children.length).toBe(1);
         })
 
         it('applies the isTerminal property when merging in a smaller word', () => {

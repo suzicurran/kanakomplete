@@ -3,10 +3,11 @@ class KanaNode {
     children: KanaNode[];
     isTerminal: boolean;
 
-    constructor(value: string) {
+    // todo: object?
+    constructor(value: string, children: KanaNode[] = [], isTerminal: boolean = false) {
         this.value = value;
-        this.children = [];
-        this.isTerminal = false;
+        this.children = children;
+        this.isTerminal = isTerminal;
     }
 
     // retrieves a child node by value, if one exists
@@ -18,20 +19,22 @@ class KanaNode {
     addChild(newChild: KanaNode) {
         const existingMatch = this.getChildOrNullByValue(newChild.value);
 
-        // if the value already exists, append the child nodes by this same method
-        if (existingMatch && newChild.children.length > 0) {
+        if (existingMatch === null) {
+            // Add the supplied node as-is
+            this.children.push(newChild);
+            return;
+        }
+
+        // if the new child is terminal, ensure isTerminal is true on the existing one
+        if (newChild.isTerminal) {
+            existingMatch.isTerminal = true;
+        }
+
+        // If the new child had any children, append them by this same method
+        if (newChild.children.length > 0) {
             newChild.children.forEach(child => {existingMatch.addChild(child)});
             return;
         }
-
-        // if it exists but this was the last node to append, ensure isTerminal is false
-        if (existingMatch) {
-            existingMatch.isTerminal = true;
-            return;
-        }
-
-        // else, we can add the supplied node as-is
-        this.children.push(newChild);
     }
 }
 
