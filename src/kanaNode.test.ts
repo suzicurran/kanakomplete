@@ -18,7 +18,7 @@ describe("KanaNode", () => {
     })
 
     describe("addChild", () => {
-        it('can add a provided node to an empty array of children', () => {
+        it('can add a provided node to its children', () => {
             // arrange
             const parentNode = new KanaNode('は');
             const nodeToAdd = new KanaNode('か');
