@@ -1,19 +1,15 @@
 import KanaNode from "./kanaNode";
+import Kana from "./kanaType";
 
 class KanaTrie {
     rootNode: KanaNode;
 
-    constructor(rootNode: KanaNode = new KanaNode('')) {
+    constructor(rootNode: KanaNode = new KanaNode(new Kana(''))) {
         this.rootNode = rootNode;
     }
 
-    addWord(kanaString: string) {
-        // todo: validations
-        const kanaArray = kanaString.split("");
-        this.insertValues(kanaArray);
-    }
-
-    insertValues(values: string[]) {
+    // todo: can I make a type specific to kana characters?
+    addKanaWord(values: Kana[]) {``
         const startingValue =  values.pop();
         if (startingValue) {
             const lastNode = new KanaNode(startingValue, [], true);

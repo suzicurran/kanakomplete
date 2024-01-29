@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "testwatch": "jest --watch",
-    "build": "tsc"
+    "build": "rm -rf './dist' && tsc"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +17,8 @@
     "jest": "^29.1.2",
     "ts-jest": "^29.1.2",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "wanakana": "^5.3.1"
   }
 }

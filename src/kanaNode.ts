@@ -1,23 +1,25 @@
+import Kana from "./kanaType";
+
 class KanaNode {
-    value: string;
+    kana: Kana;
     children: KanaNode[];
     isTerminal: boolean;
 
     // todo: object?
-    constructor(value: string, children: KanaNode[] = [], isTerminal: boolean = false) {
-        this.value = value;
+    constructor(value: Kana, children: KanaNode[] = [], isTerminal: boolean = false) {
+        this.kana = value;
         this.children = children;
         this.isTerminal = isTerminal;
     }
 
     // retrieves a child node by value, if one exists
-    getChildOrNullByValue(value: string) : KanaNode | null {
-        return this.children.find(child => child.value === value) ?? null;
+    getChildOrNullByValue(kana: Kana) : KanaNode | null {
+        return this.children.find(child => child.getKanaString() === kana.value) ?? null;
     }
 
     // takes a KanaNode and adds it to the array of children, merging with existing nodes of same value as necessary
     addChild(newChild: KanaNode) {
-        const existingMatch = this.getChildOrNullByValue(newChild.value);
+        const existingMatch = this.getChildOrNullByValue(newChild.kana);
 
         if (existingMatch === null) {
             // Add the supplied node as-is
@@ -35,6 +37,10 @@ class KanaNode {
             newChild.children.forEach(child => {existingMatch.addChild(child)});
             return;
         }
+    }
+
+    getKanaString() {
+        return this.kana.value;
     }
 }
 
